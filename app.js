@@ -31,10 +31,7 @@ app.use("/auth", authRoute);
 const mongoose = require("mongoose");
 
 async function connectDb() {
-  await mongoose.connect("mongodb+srv://sanket_db_user:R1CyhSl0ega85uMu@cluster0.cofl5cs.mongodb.net/e-commerce-db?retryWrites=true&w=majority",{
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
-  });
+  await mongoose.connect("mongodb+srv://sanket_db_user:R1CyhSl0ega85uMu@cluster0.cofl5cs.mongodb.net/e-commerce-db?retryWrites=true&w=majority");
   console.log("MongoDB connected");
 }
 
