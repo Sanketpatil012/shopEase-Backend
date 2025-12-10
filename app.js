@@ -12,7 +12,7 @@ const {verifyToken , isAdmin } = require("./middleware/auth-middleware")
 
 app.use(
   cors({
-    origin: ["http://localhost:4200","https://shop-ease-inky.vercel.app"],
+    origin: ["http://localhost:4200","https://shop-ease-ecom.vercel.app"],
     credentials: true,
   })
 );
