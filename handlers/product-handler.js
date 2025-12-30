@@ -58,6 +58,15 @@ async function getFeaturedProduct() {
   }
 }
 
+async function getProductByCateory(category){
+    try{
+       const product= await Product.find({ categoryId:category})
+       return  product.map((c)=> c.toObject())
+      } catch(error){
+        console.log("Error while fetching the categories"  , error )
+    }
+}
+
 module.exports = {
   addProduct,
   updateProduct,
@@ -66,4 +75,5 @@ module.exports = {
   getProductId,
   getNewProduct,
   getFeaturedProduct,
+  getProductByCateory
 };

@@ -7,6 +7,7 @@ const {
   getProduct,
   getProductId,
   deleteProduct,
+  getProductByCateory
 } = require("../handlers/product-handler");
 
 router.get("", async (req, res) => {
@@ -74,5 +75,22 @@ router.delete("/:id", async (req, res) => {
     res.status(500).send({ error: "Failed to delete product" });
   }
 });
+ 
+ 
+ router.get("/category/:categoryId"  , async  (req , res) =>{
+      try{
+         const category=req.params.categoryId 
+         const product = await getProductByCateory(category)
+          if(!product){
+             return null
+          }
+         res.status(200).json({ msg:"The Product is fetched Successfully" , product:product });
+       
+        }catch(error){
+          res.status(501).json({error:"Error while fetching the Products"}) ;
+      }
+ })
+
+
 
 module.exports = router;
