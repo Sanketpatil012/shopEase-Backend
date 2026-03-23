@@ -9,7 +9,9 @@ const productRoute = require("./routes/product");
 const customerRoute = require("./routes/coustumer");
 const authRoute = require("./routes/auth");
 const {verifyToken , isAdmin } = require("./middleware/auth-middleware")
+const dotenv= require('dotenv')
 
+dotenv.config({quiet: true })
 app.use(
   cors({
     origin: ["http://localhost:4200","https://shop-ease-ecom.vercel.app"],
@@ -31,7 +33,7 @@ app.use("/auth", authRoute);
 const mongoose = require("mongoose");
 
 async function connectDb() {
-  await mongoose.connect("mongodb+srv://sanket_db_user:R1CyhSl0ega85uMu@cluster0.cofl5cs.mongodb.net/e-commerce-db?retryWrites=true&w=majority");
+  await mongoose.connect(process.env.MONGO_URI);
   console.log("MongoDB connected");
 }
 
