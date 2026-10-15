@@ -1,5 +1,5 @@
 const express = require("express");
-const moongose = require("mongoose");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,7 +9,12 @@ const productRoute = require("./routes/product");
 const customerRoute = require("./routes/coustumer");
 const authRoute = require("./routes/auth");
 const {verifyToken , isAdmin } = require("./middleware/auth-middleware")
-const dotenv= require('dotenv')
+const dotenv= require('dotenv') 
+const orderRoutes = require('./routes/order');
+
+
+
+
 
 dotenv.config({quiet: true })
 app.use(
@@ -28,9 +33,10 @@ app.use("/category",verifyToken , isAdmin ,  categoryRoutes);
 app.use("/brand", verifyToken , isAdmin , brandRoutes);
 app.use("/product", verifyToken  , productRoute);
 app.use("/customer"  , verifyToken,  customerRoute);
-app.use("/auth", authRoute);
+app.use("/auth", authRoute); 
+app.use('/api/orders', orderRoutes);
 
-const mongoose = require("mongoose");
+
 
 async function connectDb() {
   await mongoose.connect(process.env.MONGO_URI);

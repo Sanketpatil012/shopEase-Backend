@@ -1,10 +1,43 @@
 
-const mongoose= require("mongoose")
+// models/Cart.js
+const mongoose = require('mongoose');
 
-const  cartSchema=  mongoose.Schema({
-    userId:{type: Schema.Types.ObjectId , ref:'categories'} , 
-    productId:Array(String)
-})
+const cartItemSchema = new mongoose.Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'products',
+    required: true
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1,
+    default: 1
+  },
+  addedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-const Cart = mongoose.model('carts' , wishListSchema)
-module.exports =  Cart
+const cartSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+    required: true,
+    unique: true
+  },
+  items: [cartItemSchema],
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Update the updatedAt timestamp before saving
+cartSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('carts', cartSchema);

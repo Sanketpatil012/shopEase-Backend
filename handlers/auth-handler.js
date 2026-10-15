@@ -36,7 +36,7 @@ async function loginDetail(model) {
           isAdmin: user.isAdmin,
         },
         "Secret",
-        { expiresIn: "1h" }
+        { expiresIn: "1h" },
       );
       const userObject = user.toObject();
       delete userObject.password;
